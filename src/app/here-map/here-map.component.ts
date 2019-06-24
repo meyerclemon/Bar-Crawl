@@ -35,6 +35,9 @@ export class HereMapComponent implements OnInit {
     private ui: any;
     private search: any;
 
+    private router: any;
+    private geocoder: any;
+
 
     public constructor() { }
 
@@ -44,6 +47,8 @@ export class HereMapComponent implements OnInit {
             "app_code": this.appCode
         });
         this.search = new H.places.Search(this.platform.getPlacesService());
+        this.router = this.platform.getRoutingService();
+        this.geocoder = this.platform.getGeocodingService();
     }
 
     public ngAfterViewInit() {
@@ -58,6 +63,7 @@ export class HereMapComponent implements OnInit {
       );
       let behavior = new H.mapevents.Behavior(new H.mapevents.MapEvents(this.map));
       this.ui = H.ui.UI.createDefault(this.map, defaultLayers);
+
   }
   public places(query: string) {
       this.map.removeObjects(this.map.getObjects());
