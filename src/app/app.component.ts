@@ -12,8 +12,8 @@ export class AppComponent implements OnInit {
     public range: string;
 
     public constructor() {
-      this.query = "";
-      this.start = "Tracy CA";
+      this.query = "bar";
+      this.start = "Seattle WA";
       this.range = "300";
     }
 

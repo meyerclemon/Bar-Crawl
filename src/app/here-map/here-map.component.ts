@@ -63,6 +63,10 @@ export class HereMapComponent implements OnInit {
       );
       let behavior = new H.mapevents.Behavior(new H.mapevents.MapEvents(this.map));
       this.ui = H.ui.UI.createDefault(this.map, defaultLayers);
+      this.map.addEventListener('tap', function(evt) {
+      // Log 'tap' and 'mouse' events:
+      console.log("hewwo");
+    });
 
   }
   // Create list of locations that apply to search query //
@@ -76,19 +80,24 @@ export class HereMapComponent implements OnInit {
           console.error(error);
       });
   }
+  ///
+
+
 
   // Place a marker at each location found above //
   private dropMarker(coordinates: any, data: any) {
       let marker = new H.map.Marker(coordinates);
       marker.setData("<p>" + data.title + "<br>" + data.vicinity + "</p>");
-      marker.addEventListener('tap', event => {
-          let bubble =  new H.ui.InfoBubble(event.target.getPosition(), {
-              content: event.target.getData()
-          });
-          this.ui.addBubble(bubble);
+      marker.addEventListener('tap', function(event) {
+        let bubble =  new H.ui.InfoBubble(event.target.getPosition(), {
+            content: event.target.getData()
+        });
+        this.ui.addBubble(bubble);
       }, false);
       this.map.addObject(marker);
   }
+
+
 
   private getCoordinates(query: string) {
     return new Promise((resolve, reject) => {
@@ -116,7 +125,7 @@ export class HereMapComponent implements OnInit {
     }
     this.map.removeObjects(this.map.getObjects());
     this.getCoordinates(start).then(geocoderResult => {
-        params["start"] = "47.60188" + "," + "-122.33402";
+        params["start"] = geocoderResult[0].Location.DisplayPosition.Latitude + "," + geocoderResult[0].Location.DisplayPosition.Longitude;
         this.router.calculateIsoline(params, data => {
             if(data.response) {
                 let center = new H.geo.Point(data.response.center.latitude, data.response.center.longitude),
