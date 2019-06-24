@@ -65,6 +65,7 @@ export class HereMapComponent implements OnInit {
       this.ui = H.ui.UI.createDefault(this.map, defaultLayers);
 
   }
+  // Create list of locations that apply to search query //
   public places(query: string) {
       this.map.removeObjects(this.map.getObjects());
       this.search.request({ "q": query, "at": this.lat + "," + this.lng }, {}, data => {
@@ -76,6 +77,7 @@ export class HereMapComponent implements OnInit {
       });
   }
 
+  // Place a marker at each location found above //
   private dropMarker(coordinates: any, data: any) {
       let marker = new H.map.Marker(coordinates);
       marker.setData("<p>" + data.title + "<br>" + data.vicinity + "</p>");
@@ -87,5 +89,56 @@ export class HereMapComponent implements OnInit {
       }, false);
       this.map.addObject(marker);
   }
+
+  private getCoordinates(query: string) {
+    return new Promise((resolve, reject) => {
+        this.geocoder.geocode({ searchText: query }, result => {
+            if(result.Response.View.length > 0) {
+                if(result.Response.View[0].Result.length > 0) {
+                    resolve(result.Response.View[0].Result);
+                } else {
+                    reject({ message: "no results found" });
+                }
+            } else {
+                reject({ message: "no results found" });
+            }
+        }, error => {
+            reject(error);
+        });
+    });
+  }
+  public route(start: string, range: string) {
+    let params = {
+        "mode": "fastest;pedestrian;",
+        "range": range,
+        "rangetype": "time",
+        "departure": "now"
+    }
+    this.map.removeObjects(this.map.getObjects());
+    this.getCoordinates(start).then(geocoderResult => {
+        params["start"] = "47.60188" + "," + "-122.33402";
+        this.router.calculateIsoline(params, data => {
+            if(data.response) {
+                let center = new H.geo.Point(data.response.center.latitude, data.response.center.longitude),
+                    isolineCoords = data.response.isoline[0].component[0].shape,
+                    linestring = new H.geo.LineString(),
+                    isolinePolygon,
+                    isolineCenter;
+                isolineCoords.forEach(coords => {
+                    linestring.pushLatLngAlt.apply(linestring, coords.split(','));
+                });
+                isolinePolygon = new H.map.Polygon(linestring);
+                isolineCenter = new H.map.Marker(center);
+                this.map.addObjects([isolineCenter, isolinePolygon]);
+                this.map.setViewBounds(isolinePolygon.getBounds());
+            }
+        }, error => {
+            console.error(error);
+        });
+    }, error => {
+        console.error(error);
+    });
+  }
+
 
 }

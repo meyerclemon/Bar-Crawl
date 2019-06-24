@@ -8,9 +8,13 @@ import { Component, OnInit } from '@angular/core';
 export class AppComponent implements OnInit {
 
     public query: string;
+    public start: string;
+    public range: string;
 
     public constructor() {
-        this.query = "";
+      this.query = "";
+      this.start = "Tracy CA";
+      this.range = "300";
     }
 
     public ngOnInit() { }
