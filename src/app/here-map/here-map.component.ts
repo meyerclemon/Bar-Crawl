@@ -93,6 +93,7 @@ export class HereMapComponent implements OnInit {
             content: event.target.getData(),
 
         });
+        //learn more about the bubble
           console.log(bubble.C+bubble.c);
           alert(bubble.C+bubble.c);
         // this.ui.addBubble(bubble);
