@@ -10,7 +10,7 @@ export class AppComponent implements OnInit {
     public query: string;
 
     public constructor() {
-        this.query = "starbucks";
+        this.query = "";
     }
 
     public ngOnInit() { }
