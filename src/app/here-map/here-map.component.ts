@@ -90,10 +90,14 @@ export class HereMapComponent implements OnInit {
       marker.setData("<p>" + data.title + "<br>" + data.vicinity + "</p>");
       marker.addEventListener('tap', function(event) {
         let bubble =  new H.ui.InfoBubble(event.target.getPosition(), {
-            content: event.target.getData()
+            content: event.target.getData(),
+
         });
-        this.ui.addBubble(bubble);
+          console.log(bubble.C+bubble.c);
+          alert(bubble.C+bubble.c);
+        // this.ui.addBubble(bubble);
       }, false);
+
       this.map.addObject(marker);
   }
 
