@@ -17,6 +17,6 @@ export class AppComponent implements OnInit {
       this.range = "300";
     }
 
-    public ngOnInit() { }
+    public ngOnInit() { }     
 
 }

@@ -55,7 +55,7 @@ export class HereMapComponent implements OnInit {
       let defaultLayers = this.platform.createDefaultLayers();
       this.map = new H.Map(
           this.mapElement.nativeElement,
-          defaultLayers.normal.map,
+          defaultLayers.normal.map,   
           {
               zoom: 15,
               center: { lat: this.lat, lng: this.lng }

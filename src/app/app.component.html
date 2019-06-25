@@ -5,7 +5,7 @@
         <label class="searchLabel" style="margin-left: 10px">Range (in seconds)</label>
         <input type="text" [(ngModel)]="range" style="margin-left: 10px" />
         <br>
-        <input type="text" placeholder="Search places..." [(ngModel)]="query" />
+        <!-- <input type="text" placeholder="Search places..." [(ngModel)]="query" /> -->
         <button (click)="map.route(start, range); map.places(query)" style="margin-left: 5px">Search</button>
     </div>
 </div>
