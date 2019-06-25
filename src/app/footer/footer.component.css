@@ -1,0 +1,29 @@
+#logo {
+  padding-left: 8em;
+}
+
+#footer {
+  width: 100%;
+ text-align: center;
+ background-color: white !important;
+ position: relative;
+
+ padding: 0;
+ padding-top: 20%;
+}
+
+.nav-link {
+  margin-top: 20px;
+}
+
+#first-line {
+  color: black;
+  font-weight: lighter;
+  font-size: 12px;
+}
+
+#second-line {
+  font-weight: lighter;
+  font-size: 12px;
+  padding-left: 57em;
+}
