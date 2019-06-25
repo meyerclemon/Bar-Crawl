@@ -30,6 +30,7 @@ export class HereMapComponent implements OnInit {
     @Input()
     public height: any;
 
+    private central: any;
     private platform: any;
     private map: any;
     private ui: any;
@@ -37,6 +38,7 @@ export class HereMapComponent implements OnInit {
 
     private router: any;
     private geocoder: any;
+
 
 
     public constructor() { }
@@ -55,7 +57,7 @@ export class HereMapComponent implements OnInit {
       let defaultLayers = this.platform.createDefaultLayers();
       this.map = new H.Map(
           this.mapElement.nativeElement,
-          defaultLayers.normal.map,   
+          defaultLayers.normal.map,
           {
               zoom: 15,
               center: { lat: this.lat, lng: this.lng }
@@ -75,6 +77,7 @@ export class HereMapComponent implements OnInit {
       this.search.request({ "q": query, "at": this.lat + "," + this.lng }, {}, data => {
           for(let i = 0; i < data.results.items.length; i++) {
               this.dropMarker({ "lat": data.results.items[i].position[0], "lng": data.results.items[i].position[1] }, data.results.items[i]);
+
           }
       }, error => {
           console.error(error);
@@ -110,6 +113,7 @@ export class HereMapComponent implements OnInit {
             if(result.Response.View.length > 0) {
                 if(result.Response.View[0].Result.length > 0) {
                     resolve(result.Response.View[0].Result);
+                      console.log(result.Response.View[0].Result[0])
                 } else {
                     reject({ message: "no results found" });
                 }
@@ -120,7 +124,12 @@ export class HereMapComponent implements OnInit {
             reject(error);
         });
     });
+
   }
+
+
+
+
   public route(start: string, range: string) {
     let params = {
         "mode": "fastest;pedestrian;",
@@ -131,9 +140,11 @@ export class HereMapComponent implements OnInit {
     this.map.removeObjects(this.map.getObjects());
     this.getCoordinates(start).then(geocoderResult => {
         params["start"] = geocoderResult[0].Location.DisplayPosition.Latitude + "," + geocoderResult[0].Location.DisplayPosition.Longitude;
+
+
         this.router.calculateIsoline(params, data => {
             if(data.response) {
-                let center = new H.geo.Point(data.response.center.latitude, data.response.center.longitude),
+              let  center = new H.geo.Point(data.response.center.latitude, data.response.center.longitude),
                     isolineCoords = data.response.isoline[0].component[0].shape,
                     linestring = new H.geo.LineString(),
                     isolinePolygon,
@@ -145,6 +156,10 @@ export class HereMapComponent implements OnInit {
                 isolineCenter = new H.map.Marker(center);
                 this.map.addObjects([isolineCenter, isolinePolygon]);
                 this.map.setViewBounds(isolinePolygon.getBounds());
+
+                this.central = center;
+
+
             }
         }, error => {
             console.error(error);
@@ -152,6 +167,8 @@ export class HereMapComponent implements OnInit {
     }, error => {
         console.error(error);
     });
+      console.log(this.central);
+
   }
 
 
