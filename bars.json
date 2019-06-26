@@ -1,0 +1,33 @@
+{ "bars": [{
+      "name": " Dead Line",
+      "adress": "114 1st Ave S Seattle, WA 98104",
+      "phone": "(206) 556-4956",
+      "image":"https://s3-media1.fl.yelpcdn.com/bphoto/aCxPFvzppDcY6lqDSYzT5A/ls.jpg",
+      "url":"https://deadlineseattle.com/"
+      }, {
+      "name": "Flastick Pub",
+      "adress": "240 2nd Ave S Seattle, WA 98104",
+      "phone": "(206) 682-0608",
+      "image":"https://s3-media4.fl.yelpcdn.com/bphoto/5BTOkL67yBEkTkJsEZqg3Q/ls.jpg",
+      "url":"https://flatstickpub.com/"
+      }, {
+      "name": "Polar Bar",
+      "adress": "700 3rd Ave Seattle, WA 98104",
+      "phone": "(206) 340-0340",
+      "image":"https://s3-media2.fl.yelpcdn.com/bphoto/hJVPry2eJZIce2vfBpibIw/ls.jpg",
+      "url":"https://thearcticclubseattle.com/dining-libations/polar-bar/"
+      }, {
+      "name": "Rabbit Hole",
+      "adress": "2222 2nd Ave Seattle, WA 98121",
+      "phone": "(206) 956-4653",
+      "image":"https://s3-media1.fl.yelpcdn.com/bphoto/Jq7BQERDS0JQH9npok3osQ/ls.jpg",
+      "url":"http://rabbitholeseattle.com/"
+      }, {
+      "name": " Jupiter Bar",
+      "adress": "2126 2nd Ave, WA 98121",
+      "phone": "(206) 448-2043",
+      "image":"https://s3-media1.fl.yelpcdn.com/bphoto/YJhXajLLACLwMdQdjfBdug/ls.jpg",
+      "url":"https://www.2ndandbelltown.com/jupiter"
+    },{
+  }]
+}
