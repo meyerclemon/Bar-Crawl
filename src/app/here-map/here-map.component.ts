@@ -30,7 +30,6 @@ export class HereMapComponent implements OnInit {
     @Input()
     public height: any;
 
-    private central: any;
     private platform: any;
     private map: any;
     private ui: any;
@@ -72,17 +71,17 @@ export class HereMapComponent implements OnInit {
 
   }
   // Create list of locations that apply to search query //
-  public places(query: string) {
-      this.map.removeObjects(this.map.getObjects());
-      this.search.request({ "q": query, "at": this.lat + "," + this.lng }, {}, data => {
-          for(let i = 0; i < data.results.items.length; i++) {
-              this.dropMarker({ "lat": data.results.items[i].position[0], "lng": data.results.items[i].position[1] }, data.results.items[i]);
-
-          }
-      }, error => {
-          console.error(error);
-      });
-  }
+  // public places(query: string) {
+  //     this.map.removeObjects(this.map.getObjects());
+  //     this.search.request({ "q": query, "at": this.lat + "," + this.lng }, {}, data => {
+  //         for(let i = 0; i < data.results.items.length; i++) {
+  //             this.dropMarker({ "lat": data.results.items[i].position[0], "lng": data.results.items[i].position[1] }, data.results.items[i]);
+  //
+  //         }
+  //     }, error => {
+  //         console.error(error);
+  //     });
+  // }
   ///
 
 
@@ -113,7 +112,7 @@ export class HereMapComponent implements OnInit {
             if(result.Response.View.length > 0) {
                 if(result.Response.View[0].Result.length > 0) {
                     resolve(result.Response.View[0].Result);
-                      console.log(result.Response.View[0].Result[0])
+
                 } else {
                     reject({ message: "no results found" });
                 }
@@ -130,7 +129,7 @@ export class HereMapComponent implements OnInit {
 
 
 
-  public route(start: string, range: string) {
+  public route(start: string, range: string, query: string) {
     let params = {
         "mode": "fastest;pedestrian;",
         "range": range,
@@ -157,8 +156,14 @@ export class HereMapComponent implements OnInit {
                 this.map.addObjects([isolineCenter, isolinePolygon]);
                 this.map.setViewBounds(isolinePolygon.getBounds());
 
-                this.central = center;
+                this.search.request({ "q": query, "at": center.lat + "," + center.lng }, {}, data => {
+                    for(let i = 0; i < data.results.items.length; i++) {
+                        this.dropMarker({ "lat": data.results.items[i].position[0], "lng": data.results.items[i].position[1] }, data.results.items[i]);
 
+                    }
+                }, error => {
+                    console.error(error);
+                });
 
             }
         }, error => {
@@ -167,7 +172,7 @@ export class HereMapComponent implements OnInit {
     }, error => {
         console.error(error);
     });
-      console.log(this.central);
+
 
   }
 
