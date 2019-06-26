@@ -52,7 +52,7 @@ export class HereMapComponent implements OnInit {
         this.geocoder = this.platform.getGeocodingService();
     }
 
-    public ngAfterViewInit(coordinates: any, data: any) {
+    public ngAfterViewInit() {
       let defaultLayers = this.platform.createDefaultLayers();
       this.map = new H.Map(
           this.mapElement.nativeElement,
@@ -62,28 +62,11 @@ export class HereMapComponent implements OnInit {
               center: { lat: this.lat, lng: this.lng }
           }
       );
-
-      let marker = new H.map.Marker(coordinates);
-      marker.setData("<p>" + data.title + "<br>" + data.vicinity + "</p>");
-      marker.addEventListener('tap', function(event) {
-        let bubble =  new H.ui.InfoBubble(event.target.getPosition(), {
-            content: event.target.getData(),
-
-        });
-        //learn more about the bubble
-          console.log(bubble.C+bubble.c);
-          console.log(this.ui);
-        this.ui.addBubble(bubble);
-
-      }, true);
-
-      this.map.addObject(marker);
-
       let behavior = new H.mapevents.Behavior(new H.mapevents.MapEvents(this.map));
-
+      this.ui = H.ui.UI.createDefault(this.map, defaultLayers);
       this.map.addEventListener('tap', function(evt) {
       // Log 'tap' and 'mouse' events:
-      console.log("hewwo");
+
     });
 
   }
@@ -104,23 +87,23 @@ export class HereMapComponent implements OnInit {
 
 
   // Place a marker at each location found above //
-  // private dropMarker(coordinates: any, data: any) {
-  //     let marker = new H.map.Marker(coordinates);
-  //     marker.setData("<p>" + data.title + "<br>" + data.vicinity + "</p>");
-  //     marker.addEventListener('tap', function(event) {
-  //       let bubble =  new H.ui.InfoBubble(event.target.getPosition(), {
-  //           content: event.target.getData(),
-  //
-  //       });
-  //       //learn more about the bubble
-  //         console.log(bubble.C+bubble.c);
-  //         console.log(this.ui);
-  //       this.ui.addBubble(bubble);
-  //
-  //     }, true);
-  //
-  //     this.map.addObject(marker);
-  // }
+  private dropMarker(coordinates: any, data: any) {
+      let marker = new H.map.Marker(coordinates);
+      marker.setData("<p>" + data.title + "<br>" + data.vicinity + "</p>");
+      marker.addEventListener('tap', function(event) {
+        let bubble =  new H.ui.InfoBubble(event.target.getPosition(), {
+            content: event.target.getData(),
+
+
+        });
+        //learn more about the bubble
+
+          console.log(bubble.C+bubble.c);
+        // this.ui.addBubble(bubble);
+      }, false);
+
+      this.map.addObject(marker);
+  }
 
 
 
@@ -174,7 +157,7 @@ export class HereMapComponent implements OnInit {
                 this.map.addObjects([isolineCenter, isolinePolygon]);
                 this.map.setViewBounds(isolinePolygon.getBounds());
 
-                this.search.request({ "q": query, "at": this.lat + "," + this.lng }, {}, data => {
+                this.search.request({ "q": query, "at": center.lat + "," + center.lng }, {}, data => {
                     for(let i = 0; i < data.results.items.length; i++) {
                         this.dropMarker({ "lat": data.results.items[i].position[0], "lng": data.results.items[i].position[1] }, data.results.items[i]);
 
