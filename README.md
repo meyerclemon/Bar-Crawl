@@ -17,7 +17,7 @@ _When the user picks a start point location, this app displays an [isoline](http
 
 ## Known Bugs
 
-_TBD_
+_None_
 
 ## Support and contact details
 
