@@ -13,8 +13,8 @@ export class AppComponent implements OnInit {
 
     public constructor() {
       this.query = "bar";
-      this.start = "Seattle WA";
-      this.range = "300";
+      this.start = "1402 3rd Ave Seattle WA";
+      this.range = "15";
     }
 
     public ngOnInit() { }

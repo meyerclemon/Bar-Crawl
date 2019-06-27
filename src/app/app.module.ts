@@ -4,11 +4,13 @@ import { FormsModule } from "@angular/forms";
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HereMapComponent } from './here-map/here-map.component';
+import { ModalComponent } from './modal/modal.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    HereMapComponent
+    HereMapComponent,
+    ModalComponent
   ],
   imports: [
     BrowserModule,

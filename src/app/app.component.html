@@ -1,3 +1,4 @@
+
 <header class="header">
   <div class="header__text-box">
       <h1 class="heading-primary">
@@ -35,14 +36,27 @@
 
 <div class="search">
     <div class="form">
-        <label class="searchLabel">Start Location: </label>
-        <input type="text" [(ngModel)]="start" /> <br>
-        <label class="searchLabel" style="margin-left: 10px">Range (in seconds): </label>
+        <label class="searchLabel">Start Location (Street Address)</label>
+        <input type="text" [(ngModel)]="start" />
+        <label class="searchLabel" style="margin-left: 10px">Range(walk time in minutes)</label>
         <input type="text" [(ngModel)]="range" style="margin-left: 10px" />
         <br>
         <button class="btn btn--white btn--animated" (click)="map.route(start, range, query)">Search</button>
     </div>
 </div>
+
+<app-modal #modal>
+  <div class="app-modal-header">
+    header
+  </div>
+  <div class="app-modal-body">
+    Whatever content you like, form fields, anything
+  </div>
+  <div class="app-modal-footer">
+    <button type="button" class="btn btn-default" (click)="modal.hide()">Close</button>
+    <button type="button" class="btn btn-primary">Save changes</button>
+  </div>
+</app-modal>
 
 <here-map
   #map
