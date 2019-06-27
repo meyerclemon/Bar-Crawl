@@ -60,7 +60,7 @@ export class HereMapComponent implements OnInit {
           this.mapElement.nativeElement,
           defaultLayers.normal.map,
           {
-              zoom: 15,
+              zoom: 10,
               center: { lat: this.lat, lng: this.lng }
           }
       );   
@@ -103,8 +103,7 @@ export class HereMapComponent implements OnInit {
         //learn more about the bubble
         console.log("I clicked a bubble.")
         tempUI.addBubble(bubble);
-        bubble.open();
-
+        bubble.addEventListener('tap', e => e.open());
       }, false);
 
       this.map.addObject(marker);
