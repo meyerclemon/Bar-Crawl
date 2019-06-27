@@ -1,11 +1,46 @@
-<div style="padding-bottom: 20px">
-    <div>
-        <label class="searchLabel">Start Location</label>
-        <input type="text" [(ngModel)]="start" />
-        <label class="searchLabel" style="margin-left: 10px">Range (in seconds)</label>
+<header class="header">
+  <div class="header__text-box">
+      <h1 class="heading-primary">
+          <span class="heading-primary--main">Bar Crawl</span>
+          <span class="heading-primary--sub">Find some bars</span>
+      </h1>
+      <a href="#" class="btn btn--white btn--animated">Discover Bars</a>
+  </div>
+</header>
+<main>
+  <section class="section-about">
+      <div class="u-center-text">
+          <h2 class="heading-secondary">
+              Luxe Bar Crawls For Bougie People
+          </h2>
+      </div>
+      <div class="grid">
+          
+          <div class="grid-text">
+              <h3 class="heading-tertiary">The best way to experience the chicest bars in Seattle</h3>
+              <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Qui quod blanditiis ab ipsum quaerat, doloribus est sunt exercitationem tempora eos itaque quia maiores, animi eius officiis. Deleniti, assumenda rem! Voluptate?</p>
+              <h3 class="heading-tertiary">Only the finest for our clients</h3>
+              <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Qui quod blanditiis ab ipsum quaerat, doloribus est sunt exercitationem tempora eos itaque quia maiores, animi eius officiis. Deleniti, assumenda rem! Voluptate?</p>
+          </div>
+          <div class="grid-images">
+              <div class="composition">
+                  <img src="img/wine-bar.jpg" alt="" class="composition__photo composition__photo--p1">
+                  <img src="img/phinney.jpg" alt="" class="composition__photo composition__photo--p2">
+                  <img src="img/unicorn.png" alt="" class="composition__photo composition__photo--p3">
+              </div>
+          </div>
+      </div>
+  </section>
+</main>
+
+<div class="search">
+    <div class="form">
+        <label class="searchLabel">Start Location: </label>
+        <input type="text" [(ngModel)]="start" /> <br>
+        <label class="searchLabel" style="margin-left: 10px">Range (in seconds): </label>
         <input type="text" [(ngModel)]="range" style="margin-left: 10px" />
         <br>
-        <button (click)="map.route(start, range, query)" style="margin-left: 5px">Search</button>
+        <button class="btn btn--white btn--animated" (click)="map.route(start, range, query)">Search</button>
     </div>
 </div>
 
