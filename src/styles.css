@@ -87,7 +87,7 @@
       text-shadow: 0.5rem 1rem 2rem rgba(0, 0, 0, 0.2); }
   
   .heading-tertiary {
-    font-size: 1.6rem;
+    font-size: 3rem;
     font-weight: 700;
     text-transform: uppercase;
     margin-bottom: 1rem; }
@@ -144,7 +144,7 @@
   .btn--animated {
     animation: moveInBottom 4s ease-out .75s;
     animation-fill-mode: backwards; }
-  
+   
   .composition__photo {
     width: 40rem;
     box-shadow: 0 1.5rem 4rem rbga(black, 0.4);
@@ -165,13 +165,13 @@
       border-radius: 5px;
       overflow: hidden;
       box-shadow: 2rem 1.5rem 4rem rgba(0, 0, 0, 0.15); }
-      .card__side--front {
-        background-image: linear-gradient(to right bottom, rgba(215, 157, 230, 0.5), rgba(74, 16, 88, 0.5)); }
+      /* .card__side--front {
+        background-image: linear-gradient(to right bottom, rgba(215, 157, 230, 0.5), rgba(74, 16, 88, 0.5)); } */
       .card__side--front img {
         /* position: absolute; */
         background-size: cover;
         height: 50rem;
-        opacity: .5; }
+         }
       .card__side--back {
         background: linear-gradient(to right bottom, rgba(215, 157, 230, 0.8), rgba(74, 16, 88, 0.8));
         transform: rotateY(180deg); }
@@ -212,7 +212,7 @@
   
   .header {
     height: 95vh;
-    background-image: linear-gradient(to right bottom, rgba(215, 157, 230, 0.8), rgba(74, 16, 88, 0.8));
+    background-image: linear-gradient(to right bottom, rgba(215, 157, 230, 0.8), rgba(74, 16, 88, 0.8)), url("/assets/img/bar-header2 copy.jpg");
     background-size: cover;
     background-position: top;
     position: relative;
@@ -256,7 +256,7 @@
     background-color: #ebc7cd;
     padding: 30rem 0; }
   
-/* , url(./img/bar-header2.jpg) */
+
 
 .search {
     text-align: center;

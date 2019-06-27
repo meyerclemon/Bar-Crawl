@@ -5,6 +5,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HereMapComponent } from './here-map/here-map.component';
 import { BarsComponent } from './bars/bars.component';
+// import { routing } from './app.routing';
 
 
 @NgModule({
@@ -16,6 +17,7 @@ import { BarsComponent } from './bars/bars.component';
   imports: [
     BrowserModule,
     AppRoutingModule,
+    // routing,
     FormsModule
   ],
   providers: [],
