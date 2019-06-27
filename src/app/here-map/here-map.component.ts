@@ -63,10 +63,10 @@ export class HereMapComponent implements OnInit {
               zoom: 10,
               center: { lat: this.lat, lng: this.lng }
           }
-      );   
+      );
         let behavior = new H.mapevents.Behavior(new H.mapevents.MapEvents(this.map));
 
-      // Added 
+      // Added
     //   this.addInfoBubble(this.map);
       this.ui = H.ui.UI.createDefault(this.map, defaultLayers);
     //   this.map.addEventListener('tap', function(event) {
@@ -91,7 +91,7 @@ export class HereMapComponent implements OnInit {
   ///
 
 
-  // Place a marker at each location found above //    
+  // Place a marker at each location found above //
   private dropMarker(coordinates: any, data: any) {
       let marker = new H.map.Marker(coordinates);
       let tempUI = this.ui;
@@ -134,7 +134,7 @@ export class HereMapComponent implements OnInit {
 
 
   public route(start: string, range: number, query: string) {
-
+    let tempUI = this.ui;
     let params = {
         "mode": "fastest;pedestrian;",
         "range": range*=60,
@@ -160,6 +160,15 @@ export class HereMapComponent implements OnInit {
                 isolineCenter = new H.map.Marker(center);
                 this.map.addObjects([isolineCenter, isolinePolygon]);
                 this.map.setViewBounds(isolinePolygon.getBounds());
+                //InfoBubble for startpoint
+                isolineCenter.addEventListener('tap', function(event) {
+                  let bubble =  new H.ui.InfoBubble(event.target.getPosition(), {
+                      content: "You Are Here!"
+                  });
+                  tempUI.addBubble(bubble);
+                  bubble.addEventListener('tap', e => e.open());
+                }, false);
+
 
                 this.search.request({ "q": query, "at": center.lat + "," + center.lng }, {}, data => {
                     for(let i = 0; i < data.results.items.length; i++) {
