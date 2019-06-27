@@ -32,7 +32,7 @@ export class HereMapComponent implements OnInit {
 
     private platform: any;
     private map: any;
-    private ui: any;
+    public ui: any;
     private search: any;
 
     private router: any;
@@ -43,6 +43,7 @@ export class HereMapComponent implements OnInit {
     public constructor() { }
 
     public ngOnInit() {
+        console.log("oninit")
         this.platform = new H.service.Platform({
             "app_id": this.appId,
             "app_code": this.appCode
@@ -53,6 +54,7 @@ export class HereMapComponent implements OnInit {
     }
 
     public ngAfterViewInit() {
+        console.log("triggered")
       let defaultLayers = this.platform.createDefaultLayers();
       this.map = new H.Map(
           this.mapElement.nativeElement,
@@ -61,13 +63,17 @@ export class HereMapComponent implements OnInit {
               zoom: 15,
               center: { lat: this.lat, lng: this.lng }
           }
-      );
-      let behavior = new H.mapevents.Behavior(new H.mapevents.MapEvents(this.map));
-      this.ui = H.ui.UI.createDefault(this.map, defaultLayers);
-      this.map.addEventListener('tap', function(evt) {
-      // Log 'tap' and 'mouse' events:
+      );   
+        let behavior = new H.mapevents.Behavior(new H.mapevents.MapEvents(this.map));
 
-    });
+      // Added 
+    //   this.addInfoBubble(this.map);
+      this.ui = H.ui.UI.createDefault(this.map, defaultLayers);
+    //   this.map.addEventListener('tap', function(event) {
+    //   // Log 'tap' and 'mouse' events:
+
+
+    // });
 
   }
   // Create list of locations that apply to search query //
@@ -85,26 +91,24 @@ export class HereMapComponent implements OnInit {
   ///
 
 
-
-  // Place a marker at each location found above //
+  // Place a marker at each location found above //    
   private dropMarker(coordinates: any, data: any) {
       let marker = new H.map.Marker(coordinates);
+      let tempUI = this.ui;
       marker.setData("<p>" + data.title + "<br>" + data.vicinity + "</p>");
       marker.addEventListener('tap', function(event) {
         let bubble =  new H.ui.InfoBubble(event.target.getPosition(), {
-            content: event.target.getData(),
-
-
+            content: event.target.getData()
         });
         //learn more about the bubble
+        console.log("I clicked a bubble.")
+        tempUI.addBubble(bubble);
+        bubble.open();
 
-          console.log(bubble.C+bubble.c);
-        // this.ui.addBubble(bubble);
       }, false);
 
       this.map.addObject(marker);
   }
-
 
 
   private getCoordinates(query: string) {
@@ -130,10 +134,11 @@ export class HereMapComponent implements OnInit {
 
 
 
-  public route(start: string, range: string, query: string) {
+  public route(start: string, range: number, query: string) {
+
     let params = {
         "mode": "fastest;pedestrian;",
-        "range": range,
+        "range": range*=60,
         "rangetype": "time",
         "departure": "now"
     }
