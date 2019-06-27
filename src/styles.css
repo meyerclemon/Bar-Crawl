@@ -168,7 +168,7 @@
       .card__side--front {
         background-image: linear-gradient(to right bottom, rgba(215, 157, 230, 0.5), rgba(74, 16, 88, 0.5)); }
       .card__side--front img {
-        position: absolute;
+        /* position: absolute; */
         background-size: cover;
         height: 50rem;
         opacity: .5; }
@@ -260,7 +260,25 @@
 
 .search {
     text-align: center;
-    background-color: rgb(215, 157, 230);
+    background-color: rgb(165, 128, 179);
     padding: 100px 0;
     margin-top: -200px;
+}
+
+.form {
+    font-size: 25px;
+    font-weight: 700;
+    color: white;
+}
+
+button { 
+    text-transform: uppercase;
+    text-decoration: none;
+    padding: 1.5rem 4rem;
+    display: inline-block;
+    border-radius: 10rem;
+    transition: all .2s;
+    position: relative;
+    font-size: 1.6rem; 
+    margin-top: 3rem;
 }

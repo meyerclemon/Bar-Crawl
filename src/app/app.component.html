@@ -5,7 +5,7 @@
           <span class="heading-primary--main">Bar Crawl</span>
           <span class="heading-primary--sub">Find some bars</span>
       </h1>
-      <a href="#" class="btn btn--white btn--animated">Discover Bars</a>
+      <a href="/bars" class="btn btn--white btn--animated">Discover Bars</a>
   </div>
 </header>
 <main>
@@ -36,9 +36,9 @@
 
 <div class="search">
     <div class="form">
-        <label class="searchLabel">Start Location (Street Address)</label>
-        <input type="text" [(ngModel)]="start" />
-        <label class="searchLabel" style="margin-left: 10px">Range(walk time in minutes)</label>
+        <label class="searchLabel">Start Location (Street Address): </label>
+        <input type="text" [(ngModel)]="start" /> <br>
+        <label class="searchLabel" style="margin-left: 10px">Range(walk time in minutes): </label>
         <input type="text" [(ngModel)]="range" style="margin-left: 10px" />
         <br>
         <button class="btn btn--white btn--animated" (click)="map.route(start, range, query)">Search</button>
